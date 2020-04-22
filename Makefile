@@ -12,6 +12,3 @@ orientdb-up: ## brings up a kafka dev cluster
 
 orientdb-down: ## brings up a kafka dev cluster
 	docker-compose -f orientdb/orientdb-compose.yml down
-
-release-test: ## release test for java
-	mvn deploy -Dregistry=https://maven.pkg.github.com/knowledge-io/kgio-java-commons -Dtoken=c53b53107bd9f0eae44492e33ad6aa5b3028f09b -DskipTests
