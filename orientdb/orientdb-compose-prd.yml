@@ -13,4 +13,4 @@ services:
       - 2480:2480
       - 2424:2424
   volumes:
-  orientdb: /etc/orientdb
+    - orientdb: /usr/local/orientdb

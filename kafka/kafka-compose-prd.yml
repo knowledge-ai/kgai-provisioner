@@ -5,6 +5,9 @@ services:
     image: confluentinc/cp-zookeeper
     hostname: zookeeper
     container_name: zookeeper
+    volumes:
+      - zk-data:/var/lib/zookeeper/data
+      - zk-log:/var/lib/zookeeper/log
     ports:
       - "2181:2181"
     environment:
@@ -17,6 +20,8 @@ services:
     container_name: broker
     depends_on:
       - zookeeper
+    volumes:
+      - kafka-data:/var/lib/kafka/data
     ports:
       - "29092:29092"
       - "9092:9092"
@@ -57,3 +62,7 @@ services:
     links:
       - broker
       - schema-registry
+  volumes:
+    - zk-data: /usr/local/zk-data
+    - zk-log: /usr/local/zk-log
+    - kafka-data: /usr/local/kafka-data
