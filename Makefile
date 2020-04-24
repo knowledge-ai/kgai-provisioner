@@ -7,8 +7,11 @@ kafka-up: ## brings up a kafka dev cluster
 kafka-down: ## brings up a kafka dev cluster
 	docker-compose -f kafka/kafka-compose.yml down
 
-orientdb-create-db: ## brings up a orientdb dev cluster
+orientdb-create-db-dev: ## provisions databases in a dev orientdb cluster
 	orientdb/create-db.sh
+
+orientdb-create-db-prd: ## provisions databases in a prd orientdb cluster
+	export SETUP_PRD=1 && orientdb/create-db.sh && unset SETUP_PRD
 
 orientdb-up-dev: ## brings up a orientdb dev cluster
 	. ./.env && docker-compose -f orientdb/orientdb-compose.yml up -d
@@ -16,8 +19,8 @@ orientdb-up-dev: ## brings up a orientdb dev cluster
 orientdb-down-dev: ## brings up a orientdb dev cluster
 	. ./.env && docker-compose -f orientdb/orientdb-compose.yml down
 
-orientdb-up-prd: ## brings up a orientdb dev cluster
+orientdb-up-prd: ## brings up a orientdb prd cluster
 	. ./.env && docker-compose -f orientdb/orientdb-compose.yml -f orientdb/orientdb-compose-prd.yml up -d
 
-orientdb-down-prd: ## brings up a orientdb dev cluster
+orientdb-down-prd: ## brings up a orientdb prd cluster
 	. ./.env && docker-compose -f orientdb/orientdb-compose.yml -f orientdb/orientdb-compose-prd.yml down
