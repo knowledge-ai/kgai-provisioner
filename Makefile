@@ -7,8 +7,14 @@ kafka-up: ## brings up a kafka dev cluster
 kafka-down: ## brings up a kafka dev cluster
 	docker-compose -f kafka/kafka-compose.yml down
 
-orientdb-up: ## brings up a kafka dev cluster
+orientdb-up-dev: ## brings up a orientdb dev cluster
 	docker-compose -f orientdb/orientdb-compose.yml up -d
 
-orientdb-down: ## brings up a kafka dev cluster
+orientdb-down-dev: ## brings up a orientdb dev cluster
 	docker-compose -f orientdb/orientdb-compose.yml down
+
+orientdb-up-prd: ## brings up a orientdb dev cluster
+	docker-compose -f orientdb/orientdb-compose.yml -f orientdb/orientdb-compose-prd.yml up -d
+
+orientdb-down-prd: ## brings up a orientdb dev cluster
+	docker-compose -f orientdb/orientdb-compose.yml -f orientdb/orientdb-compose-prd.yml down

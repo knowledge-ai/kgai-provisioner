@@ -4,15 +4,9 @@ services:
     image: orientdb
     command: dserver.sh
     container_name: tr-odb1
-    volumes:
-      - orientdbconfig:/orientdb/config
-      - orientdb:/orientdb/databases
     environment:
       ORIENTDB_ROOT_PASSWORD: root
       ORIENTDB_NODE_NAME: tr-odb1
     ports:
       - 2480:2480
       - 2424:2424
-  volumes:
-  orientdb: ${ORIENTDB_PATH}
-  orientdbconfig: ${ORIENTDB_CONFIG}
