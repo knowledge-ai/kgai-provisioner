@@ -5,7 +5,7 @@ services:
     command: dserver.sh
     container_name: tr-odb1
     environment:
-      ORIENTDB_ROOT_PASSWORD: root
+      ORIENTDB_ROOT_PASSWORD: root # for local deployment keep it easy
       ORIENTDB_NODE_NAME: tr-odb1
     ports:
       - 2480:2480

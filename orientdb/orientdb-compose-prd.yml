@@ -7,7 +7,7 @@ services:
     volumes:
       - orientdb:/orientdb/databases
     environment:
-      ORIENTDB_ROOT_PASSWORD: root
+      ORIENTDB_ROOT_PASSWORD: ${ORIENTDB_ROOT_PASS}
       ORIENTDB_NODE_NAME: tr-odb1
     ports:
       - 2480:2480
