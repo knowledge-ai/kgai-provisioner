@@ -32,4 +32,4 @@ docker cp orientdb/create-db-pass.osql tr-odb1:/tmp/create-db-pass.osql
 # remove sensitive file from local
 rm -f orientdb/create-db-pass.osql
 
-docker exec -it tr-odb1 /orientdb/bin/console.sh /tmp/create-db-pass.osql
+docker exec tr-odb1 /orientdb/bin/console.sh /tmp/create-db-pass.osql
