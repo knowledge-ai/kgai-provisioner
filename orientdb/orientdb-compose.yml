@@ -10,3 +10,8 @@ services:
     ports:
       - 2480:2480
       - 2424:2424
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: db.orientdb
