@@ -1,3 +1,2 @@
 
-CREATE DATABASE remote:localhost/test root ORIENTDB_ROOT_PASS PLOCAL
-CREATE DATABASE remote:localhost/dev root ORIENTDB_ROOT_PASS PLOCAL
+CREATE DATABASE remote:localhost/news-raw root ORIENTDB_ROOT_PASS PLOCAL

@@ -1,14 +1,10 @@
-version: '3'
+version: '3.5'
 services:
   fluentd:
-    image: fluentd:efk
+    image: knowledgeai/kgai-fluentd:0.0.1
     container_name: fluentd
-    build:
-      context: ./fluentd
     environment:
       FLUENTD_CONF: fluentd.conf
-    volumes:
-      - ./fluentd/conf/fluentd.conf:/fluentd/etc/fluentd.conf
     ports:
       - "9880:9880"
       - "24224:24224"
@@ -32,4 +28,4 @@ services:
       - "5601:5601"
 
 volumes:
-  es-data01: /usr/local/es-data01
+  es-data01:

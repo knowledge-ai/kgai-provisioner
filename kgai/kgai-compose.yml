@@ -1,0 +1,40 @@
+version: "3.5"
+services:
+  kgai-py-crawler:
+    image: knowledgeai/kgai-py-crawler:1.0.1
+    container_name: kgai-py-crawler
+    # override parameters
+    environment:
+      KAFKA_BROKER: "broker:9092"
+      KAFKA_SCHEMA: "http://schema-registry:8081"
+      NEWS_TOPIC: corona
+      SCRAPE_MONTH: "false"
+      PARSE_ALL: "false"
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: kgai.kgai-py-crawler
+    networks:
+     - kgai-network
+
+  # kgai-java-raw:
+  #   image: knowledgeai/kgai-java-raw:1.0.0
+  #   container_name: kgai-java-raw
+  #   # override parameters
+  #   environment:
+  #     KAFKA_BROKER: "broker:9092"
+  #     KAFKA_SCHEMA_REGISTRY: "http://schema-registry:8081"
+  #     ORIENTDB_URL: "remote:odb1"
+  #   logging:
+  #     driver: "fluentd"
+  #     options:
+  #       fluentd-address: localhost:24224
+  #       tag: kgai.kgai-py-crawler
+  #   networks:
+  #    - kgai-network
+
+networks:
+  kgai-network:
+    external: true
+    name: kgai-network

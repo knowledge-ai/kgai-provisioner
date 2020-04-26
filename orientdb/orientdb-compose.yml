@@ -1,4 +1,4 @@
-version: "3"
+version: "3.5"
 services:
   odb1:
     image: orientdb
@@ -15,3 +15,10 @@ services:
       options:
         fluentd-address: localhost:24224
         tag: db.orientdb
+    networks:
+     - kgai-network
+
+networks:
+  kgai-network:
+    external: true
+    name: kgai-network
