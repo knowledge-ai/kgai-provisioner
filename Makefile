@@ -54,3 +54,18 @@ kgai-up: ## brings up all KGAI apps -- use after all dependancies have been crea
 
 kgai-down: ## brings down all KGAI apps -- use after all dependancies have been created
 	docker-compose -f kgai/kgai-compose.yml down
+
+build-push-metricbeat: ## builds a metricbeat with specific configs and pushes to hub
+	cd metricbeat/custom-metric && source build-push.sh && cd -
+
+metricbeat-dev-up: ## brings up a metricbeat dev cluster
+	docker-compose -f orientdb/orientdb-compose.yml up -d
+
+metricbeat-dev-down: ## brings down a metricbeat dev cluster
+	docker-compose -f metricbeat/metricbeat-compose.yml down
+
+metricbeat-prd-up: ## brings up a metricbeat prd cluster
+	. ./.env && docker-compose -f metricbeat/metricbeat-compose.yml -f metricbeat/metricbeat-compose-prd.yml up -d
+
+metricbeat-prd-down: ## brings up a metricbeat prd cluster
+	. ./.env && docker-compose -f metricbeat/metricbeat-compose.yml -f metricbeat/metricbeat-compose-prd.yml down
