@@ -1,38 +1,48 @@
 version: "3.5"
 services:
   kgai-py-crawler:
-    image: knowledgeai/kgai-py-crawler:1.0.1
+    image: knowledgeai/kgai-py-crawler:1.2.1
     container_name: kgai-py-crawler
     # override parameters
     environment:
       KAFKA_BROKER: "broker:9092"
       KAFKA_SCHEMA: "http://schema-registry:8081"
       NEWS_TOPIC: corona
-      SCRAPE_MONTH: "false"
+      SCRAPE_MONTH: "true"
       PARSE_ALL: "false"
+      COMMON_CRAWL: "true"
+      NEWS_CRAWL: "false"
+      # these should me mounted, check mounts below
+      WARC_DOWNLOAD_DIR: "/CommonCrawl/WARC"
+      ARTICLE_DOWNLOAD_DIR: "/CommonCrawl/Articles"
+    volumes:
+      - commoncrawl-data:/CommonCrawl
     logging:
       driver: "fluentd"
       options:
         fluentd-address: localhost:24224
         tag: kgai.kgai-py-crawler
     networks:
-     - kgai-network
+      - kgai-network
 
-  # kgai-java-raw:
-  #   image: knowledgeai/kgai-java-raw:1.0.0
-  #   container_name: kgai-java-raw
-  #   # override parameters
-  #   environment:
-  #     KAFKA_BROKER: "broker:9092"
-  #     KAFKA_SCHEMA_REGISTRY: "http://schema-registry:8081"
-  #     ORIENTDB_URL: "remote:odb1"
-  #   logging:
-  #     driver: "fluentd"
-  #     options:
-  #       fluentd-address: localhost:24224
-  #       tag: kgai.kgai-py-crawler
-  #   networks:
-  #    - kgai-network
+  kgai-java-raw:
+    image: knowledgeai/kgai-java-raw:1.0.0
+    container_name: kgai-java-raw
+    # override parameters
+    environment:
+      KAFKA_BROKER: "broker:9092"
+      KAFKA_SCHEMA_REGISTRY: "http://schema-registry:8081"
+      ORIENTDB_URL: "remote:odb1"
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: kgai.kgai-java-raw
+    networks:
+      - kgai-network
+
+volumes:
+  commoncrawl-data:
 
 networks:
   kgai-network:

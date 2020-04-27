@@ -4,7 +4,7 @@ help: ## Lists available commands and their explanation
 build-push-fluentd: ## builds a fluentd with specific configs and pushes to hub
 	cd efk/fluentd && source build-push.sh && cd -
 
-create-network: # creates the kgai-network used as common network in all stacks
+create-network: ## creates the kgai-network used as common network in all stacks
 	docker network create kgai-network
 
 efk-dev-up: ## brings up a efk dev cluster
