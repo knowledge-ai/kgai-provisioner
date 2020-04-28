@@ -9,6 +9,11 @@ services:
       #ELASTICSEARCH_USERNAME: ${ELASTICSEARCH_USERNAME:-elastic}
       #ELASTICSEARCH_PASSWORD: ${ELASTICSEARCH_PASSWORD:-changeme}
     hostname: metricbeat
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: metric.metricbeat
     user: root
     volumes:
       - /proc:/hostfs/proc:ro
