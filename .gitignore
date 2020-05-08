@@ -5,3 +5,5 @@
 .gitsecret/keys/random_seed
 !*.secret
 .env
+
+.vscode

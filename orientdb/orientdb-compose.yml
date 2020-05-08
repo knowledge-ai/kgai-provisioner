@@ -4,6 +4,8 @@ services:
     image: orientdb
     command: dserver.sh
     container_name: tr-odb1
+    volumes:
+      - orientdb:/orientdb/databases
     environment:
       ORIENTDB_ROOT_PASSWORD: root # for local deployment keep it easy
       ORIENTDB_NODE_NAME: tr-odb1
@@ -17,3 +19,6 @@ networks:
   kgai-network:
     external: true
     name: kgai-network
+    
+volumes:
+  orientdb:

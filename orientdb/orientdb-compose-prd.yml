@@ -4,8 +4,6 @@ services:
     image: orientdb
     command: dserver.sh
     container_name: tr-odb1
-    volumes:
-      - orientdb:/orientdb/databases
     environment:
       ORIENTDB_ROOT_PASSWORD: ${ORIENTDB_ROOT_PASS}
       ORIENTDB_NODE_NAME: tr-odb1
@@ -17,6 +15,3 @@ services:
       options:
         fluentd-address: localhost:24224
         tag: db.orientdb
-
-volumes:
-  orientdb:

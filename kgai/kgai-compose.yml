@@ -8,20 +8,14 @@ services:
       KAFKA_BROKER: "broker:9092"
       KAFKA_SCHEMA: "http://schema-registry:8081"
       NEWS_TOPIC: corona
-      SCRAPE_MONTH: "true"
+      SCRAPE_MONTH: "false"
       PARSE_ALL: "false"
-      COMMON_CRAWL: "true"
-      NEWS_CRAWL: "false"
+      COMMON_CRAWL: "false"
+      COMMON_CRAWL_DAYS_BACK: 30
+      NEWS_CRAWL: "true"
       # these should me mounted, check mounts below
-      WARC_DOWNLOAD_DIR: "/CommonCrawl/WARC"
-      ARTICLE_DOWNLOAD_DIR: "/CommonCrawl/Articles"
-    volumes:
-      - commoncrawl-data:/CommonCrawl
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: localhost:24224
-        tag: kgai.kgai-py-crawler
+      WARC_DOWNLOAD_DIR: "./CommonCrawl/WARC"
+      ARTICLE_DOWNLOAD_DIR: "./CommonCrawl/Articles"
     networks:
       - kgai-network
 
@@ -33,13 +27,23 @@ services:
       KAFKA_BROKER: "broker:9092"
       KAFKA_SCHEMA_REGISTRY: "http://schema-registry:8081"
       ORIENTDB_URL: "remote:odb1"
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: localhost:24224
-        tag: kgai.kgai-java-raw
     networks:
       - kgai-network
+  
+  # kgai-py-basic-nlp:
+  #   image: knowledgeai/kgai-py-basic-nlp:1.0.0
+  #   container_name: kgai-py-basic-nlp
+  #   # override parameters
+  #   environment:
+  #     KAFKA_BROKER: "broker:9092"
+  #     KAFKA_SCHEMA: "http://schema-registry:8081"
+  #     AVRO_NAMESPACE: "ai.knowledge.news.nlp"
+  #     KAFKA_LISTEN_TOPIC: "news-raw"
+  #     KAFKA_CONSUMER_ID: "news-nlp"
+  #     KAFKA_PUBLISH_TOPC: "news-nlp"
+  #     PUBLISH_NLP_KAFKA: "true"
+  #   networks:
+  #     - kgai-network
 
 volumes:
   commoncrawl-data:
