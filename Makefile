@@ -98,10 +98,19 @@ build-kafka-broker: ## builds the custom broker with server.properties for singl
 	cd kafka/broker && source build-push.sh && cd -
 
 chrome-up: ## runs a selenium chrome container exposing port 4444 and attached to the stack network
-	cd chrome && source run-chrome.sh && cd -
-
-chrome-up: ## runs a selenium chrome container exposing port 4444 and attached to the stack network
 	docker run --network="kgai-network" --name kgai-chrome -d -p 4444:4444 selenium/standalone-chrome
 
 chrome-down: ## kills the selenium chrome container
 	docker kill kgai-chrome
+
+scylla-prd-up: ## brings up a single node prod scylla attached to the kgai-network
+	. ./.env && docker-compose -f scylladb/scylla-compose.yml -f scylladb/scylla-compose-prd.yml up -d
+
+scylla-dev-up: ## brings up a single node dev scylla attached to the kgai-network
+	. ./.env && docker-compose -f scylladb/scylla-compose.yml up -d
+
+scylla-dev-down: ## brings down a single node dev scylla attached to the kgai-network
+	. ./.env && docker-compose -f scylladb/scylla-compose.yml down
+
+scylla-prd-down: ## brings down a single node prod scylla attached to the kgai-network
+	. ./.env && docker-compose -f scylladb/scylla-compose.yml -f scylladb/scylla-compose-prd.yml down

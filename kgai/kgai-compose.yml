@@ -13,6 +13,7 @@ services:
       COMMON_CRAWL: "false"
       COMMON_CRAWL_DAYS_BACK: 30
       NEWS_CRAWL: "true"
+      KAFKA_NEWS_RAW_TOPIC: "news-raw"
       # these should me mounted, check mounts below
       WARC_DOWNLOAD_DIR: "./CommonCrawl/WARC"
       ARTICLE_DOWNLOAD_DIR: "./CommonCrawl/Articles"
@@ -27,6 +28,7 @@ services:
       KAFKA_BROKER: "broker:9092"
       KAFKA_SCHEMA_REGISTRY: "http://schema-registry:8081"
       ORIENTDB_URL: "remote:odb1"
+      KAFKA_NEWS_RAW_TOPIC: "newsRaw"
     networks:
       - kgai-network
   

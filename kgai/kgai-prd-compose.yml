@@ -11,8 +11,9 @@ services:
       SCRAPE_MONTH: "true"
       PARSE_ALL: "false"
       COMMON_CRAWL: "true"
-      COMMON_CRAWL_DAYS_BACK: 30
+      COMMON_CRAWL_DAYS_BACK: "30"
       NEWS_CRAWL: "true"
+      KAFKA_NEWS_RAW_TOPIC: "newsRaw"
       # these should me mounted, check mounts below
       WARC_DOWNLOAD_DIR: "/CommonCrawl/WARC"
       ARTICLE_DOWNLOAD_DIR: "/CommonCrawl/Articles"
@@ -34,6 +35,7 @@ services:
       KAFKA_BROKER: "broker:9092"
       KAFKA_SCHEMA_REGISTRY: "http://schema-registry:8081"
       ORIENTDB_URL: "remote:odb1"
+      KAFKA_TOPIC_NAME: "newsRaw"
     logging:
       driver: "fluentd"
       options:
